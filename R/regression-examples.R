@@ -45,7 +45,7 @@ tbl_uvregression(
 # using a logistic regression model
 tbl_uvregression(
   nlsy,
-  y = glasses,
+  y = nsibs,
   include = c(
     sex_cat, race_eth_cat,
     eyesight_cat, glasses, age_bir
@@ -74,28 +74,33 @@ logistic_model <- glm(glasses ~ eyesight_cat + sex_cat,
   data = nlsy, family = binomial()
 )
 
+logistic_model1 <- glm(nsibs ~ eyesight_cat + sex_cat + income,
+											data = nlsy, family = binomial()
+)
 
 ## Tables
 # we use the models we just fit to create the tables
 tbl_regression(
-  linear_model,
+  poisson_model,
   # include the intercept
   intercept = TRUE,
   # relabel the variables
   label = list(
     sex_cat ~ "Sex",
     race_eth_cat ~ "Race/ethnicity",
-    age_bir ~ "Age at first birth"
+    age_bir ~ "Age at first birth",
+    nsibs ~ "Number of siblings"
   )
 )
 
 
 tbl_regression(
-  logistic_model,
+  poisson_model,
   exponentiate = TRUE,
   label = list(
     sex_cat ~ "Sex",
-    eyesight_cat ~ "Eyesight"
+    eyesight_cat ~ "Eyesight",
+    nsibs ~ "Number of siblings"
   )
 )
 
@@ -110,7 +115,8 @@ tbl_no_int <- tbl_regression(
   label = list(
     sex_cat ~ "Sex",
     race_eth_cat ~ "Race/ethnicity",
-    age_bir ~ "Age at first birth"
+    age_bir ~ "Age at first birth",
+    nsibs ~ "Number of siblings"
   )
 )
 

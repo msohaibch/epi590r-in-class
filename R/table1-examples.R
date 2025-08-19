@@ -108,8 +108,32 @@ tbl_summary(nlsy,
 						digits = list(sleep_wknd ~ c(0, 1), sleep_wkdy ~ c (0,1) , income ~ c (1,1)
 						)) |>  modify_table_styling(
 		columns = label,
-		rows = label == "Race/Ethnicity",
+		rows = label == "race/ethnicity",
 		footnote = "see https://www.nlsinfo.org/content/cohorts/nlsy79/topical-guide/household/race-ethnicity-immigration-data"
 	)
+
+
+tbl_summary(nlsy,
+						include = c(
+							starts_with("sleep"),
+							income,
+							race_eth_cat,
+							region_cat),
+						label= list(
+							race_eth_cat~ "race/ethnicity",
+							income~ "Income",
+							sleep_wkdy~ "sleep on weekdays",
+							sleep_wknd~ "sleep on weekends"
+						),
+						statistic= list(
+							starts_with(sleep) ~ "{mean}, {min}-{max}",
+							income~ "{p10} - {p90}"
+						),
+						digits = list(sleep_wknd ~ c(0, 1), sleep_wkdy ~ c (0,1) , income ~ c (1,1)
+						)) |>  modify_table_styling(
+							columns = label,
+							rows = label == "race/ethnicity",
+							footnote = "see https://www.nlsinfo.org/content/cohorts/nlsy79/topical-guide/household/race-ethnicity-immigration-data"
+						)
 
 
