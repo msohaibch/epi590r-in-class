@@ -57,20 +57,35 @@ return(rise)
 }
 raise1(5,3)
 
-i<-c(300, 400, 350, 270, 250, 330, 344, 278,298,288,333,310,325,364,278,288,306,313)
+
 n<- length(x)
 m<- sum(x)/n
 sumofsquares<- sum((x-m)^2)
 standardev<- sqrt(sumofsquares/n-1)
 
+t<-na.omit(i)
 
-
-standard_dev<- function(x) {n<- length(x)
+standard_dev<- function(x) {if (length(x) <=1) {return(NA)} else {n<- length(x)
 m<- sum(x)/n
 sumofsquares<- sum((x-m)^2)
 standardev<- sqrt(sumofsquares/n-1)
-return(standardev)}
-standard_dev(x)
+return(standardev)} }
+e<- 5
 
+
+
+i<-c(300, NA, 400, 350, 270, 250, 330, 344, 278,298,288,333,310,325,364,278,288,306,313)
+
+standard_dev<- function(x, na.rm= TRUE )
+{if (length(x) <=1) {return(NA)} else
+		{ x<-na.omit(x)
+			n<- length(x)
+m<- sum(x)/n
+sumofsquares<- sum((x-m)^2)
+standardev<- sqrt(sumofsquares/n-1)
+return(standardev)} }
+
+
+standard_dev(i)
 
 
